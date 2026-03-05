@@ -9,8 +9,8 @@ import (
 	"time"
 
 	logf "github.com/cert-manager/cert-manager/pkg/logs"
-	"github.com/cert-manager/cert-manager/test/acme/dns"
-	"github.com/cert-manager/cert-manager/test/acme/dns/server"
+	acmetest "github.com/cert-manager/cert-manager/test/acme"
+	"github.com/cert-manager/cert-manager/test/acme/server"
 	"github.com/sockmister/cert-manager-webhook-inwx/test"
 	extapi "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
@@ -55,16 +55,16 @@ func TestRunSuite(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	fixture := dns.NewFixture(&solver{},
-		dns.SetResolvedZone(zone),
-		dns.SetResolvedFQDN(fqdn),
-		dns.SetAllowAmbientCredentials(false),
-		dns.SetDNSServer(srv.ListenAddr()),
-		dns.SetPropagationLimit(time.Duration(60)*time.Second),
-		dns.SetUseAuthoritative(false),
+	fixture := acmetest.NewFixture(&solver{},
+		acmetest.SetResolvedZone(zone),
+		acmetest.SetResolvedFQDN(fqdn),
+		acmetest.SetAllowAmbientCredentials(false),
+		acmetest.SetDNSServer(srv.ListenAddr()),
+		acmetest.SetPropagationLimit(time.Duration(60)*time.Second),
+		acmetest.SetUseAuthoritative(false),
 		// Set to false because INWX implementation deletes all records
-		dns.SetStrict(false),
-		dns.SetConfig(&extapi.JSON{
+		acmetest.SetStrict(false),
+		acmetest.SetConfig(&extapi.JSON{
 			Raw: d,
 		}),
 	)
@@ -106,15 +106,15 @@ func TestRunSuiteWithSecret(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	fixture := dns.NewFixture(&solver{},
-		dns.SetResolvedZone(zone),
-		dns.SetResolvedFQDN(fqdn),
-		dns.SetAllowAmbientCredentials(false),
-		dns.SetDNSServer(srv.ListenAddr()),
-		dns.SetManifestPath("testdata/secret-inwx-credentials.yaml"),
-		dns.SetPropagationLimit(time.Duration(60)*time.Second),
-		dns.SetUseAuthoritative(false),
-		dns.SetConfig(&extapi.JSON{
+	fixture := acmetest.NewFixture(&solver{},
+		acmetest.SetResolvedZone(zone),
+		acmetest.SetResolvedFQDN(fqdn),
+		acmetest.SetAllowAmbientCredentials(false),
+		acmetest.SetDNSServer(srv.ListenAddr()),
+		acmetest.SetManifestPath("testdata/secret-inwx-credentials.yaml"),
+		acmetest.SetPropagationLimit(time.Duration(60)*time.Second),
+		acmetest.SetUseAuthoritative(false),
+		acmetest.SetConfig(&extapi.JSON{
 			Raw: d,
 		}),
 	)
@@ -157,16 +157,16 @@ func TestRunSuiteWithTwoFA(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	fixture := dns.NewFixture(&solver{},
-		dns.SetResolvedZone(zoneTwoFA),
-		dns.SetResolvedFQDN(fqdn),
-		dns.SetAllowAmbientCredentials(false),
-		dns.SetDNSServer(srv.ListenAddr()),
-		dns.SetPropagationLimit(time.Duration(60)*time.Second),
-		dns.SetUseAuthoritative(false),
+	fixture := acmetest.NewFixture(&solver{},
+		acmetest.SetResolvedZone(zoneTwoFA),
+		acmetest.SetResolvedFQDN(fqdn),
+		acmetest.SetAllowAmbientCredentials(false),
+		acmetest.SetDNSServer(srv.ListenAddr()),
+		acmetest.SetPropagationLimit(time.Duration(60)*time.Second),
+		acmetest.SetUseAuthoritative(false),
 		// Set to false because INWX implementation deletes all records
-		dns.SetStrict(false),
-		dns.SetConfig(&extapi.JSON{
+		acmetest.SetStrict(false),
+		acmetest.SetConfig(&extapi.JSON{
 			Raw: d,
 		}),
 	)
@@ -208,15 +208,15 @@ func TestRunSuiteWithSecretAndTwoFA(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	fixture := dns.NewFixture(&solver{},
-		dns.SetResolvedZone(zoneTwoFA),
-		dns.SetResolvedFQDN(fqdn),
-		dns.SetAllowAmbientCredentials(false),
-		dns.SetDNSServer(srv.ListenAddr()),
-		dns.SetManifestPath("testdata/secret-inwx-credentials-otp.yaml"),
-		dns.SetPropagationLimit(time.Duration(60)*time.Second),
-		dns.SetUseAuthoritative(false),
-		dns.SetConfig(&extapi.JSON{
+	fixture := acmetest.NewFixture(&solver{},
+		acmetest.SetResolvedZone(zoneTwoFA),
+		acmetest.SetResolvedFQDN(fqdn),
+		acmetest.SetAllowAmbientCredentials(false),
+		acmetest.SetDNSServer(srv.ListenAddr()),
+		acmetest.SetManifestPath("testdata/secret-inwx-credentials-otp.yaml"),
+		acmetest.SetPropagationLimit(time.Duration(60)*time.Second),
+		acmetest.SetUseAuthoritative(false),
+		acmetest.SetConfig(&extapi.JSON{
 			Raw: d,
 		}),
 	)

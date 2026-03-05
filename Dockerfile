@@ -1,4 +1,4 @@
-FROM golang:1.19-alpine AS build
+FROM golang:1.26-alpine AS build
 
 ARG GOARCH="amd64"
 ARG GOARM=""
