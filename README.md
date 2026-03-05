@@ -7,8 +7,8 @@ The helm chart is listed at Artifact Hub in repository [smueller18](https://arti
 ## Requirements
 
 - [helm](https://helm.sh/) >= v3.0.0
-- [kubernetes](https://kubernetes.io/) >= v1.18.0
-- [cert-manager](https://cert-manager.io/) >= 1.0.0
+- [kubernetes](https://kubernetes.io/) >= v1.28.0
+- [cert-manager](https://cert-manager.io/) >= 1.10.0
 
 ## Configuration
 
@@ -160,11 +160,6 @@ spec:
 
 ### Running the test suite
 
-1. Download test binaries
-    ```bash
-    scripts/fetch-test-binaries.sh
-    ```
-
 1. Create two test accounts (one without 2FA and one with 2FA enabled) at <https://ote.inwx.com/en/customer/signup> or use existing ones.
 
    1. Without 2FA
@@ -192,7 +187,7 @@ spec:
 
 1. Run tests with your created domains
     ```bash
-    TEST_ZONE_NAME="$YOUR_NEW_DOMAIN." TEST_ZONE_NAME_WITH_TWO_FA="$YOUR_NEW_DOMAIN_WITH_TWO_FA." go test -cover .
+    TEST_ZONE_NAME="$YOUR_NEW_DOMAIN." TEST_ZONE_NAME_WITH_TWO_FA="$YOUR_NEW_DOMAIN_WITH_TWO_FA." make test
     ```
 
 ### Building the container image
