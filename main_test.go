@@ -45,7 +45,7 @@ func TestRunSuite(t *testing.T) {
 		},
 	}
 
-	if err := srv.Run(ctx); err != nil {
+	if err := srv.Run(ctx, "udp"); err != nil {
 		t.Fatalf("failed to start test server: %v", err)
 	}
 	defer srv.Shutdown()
@@ -96,7 +96,7 @@ func TestRunSuiteWithSecret(t *testing.T) {
 		},
 	}
 
-	if err := srv.Run(ctx); err != nil {
+	if err := srv.Run(ctx, "udp"); err != nil {
 		t.Fatalf("failed to start test server: %v", err)
 	}
 	defer srv.Shutdown()
@@ -147,7 +147,7 @@ func TestRunSuiteWithTwoFA(t *testing.T) {
 		},
 	}
 
-	if err := srv.Run(ctx); err != nil {
+	if err := srv.Run(ctx, "udp"); err != nil {
 		t.Fatalf("failed to start test server: %v", err)
 	}
 	defer srv.Shutdown()
@@ -198,7 +198,7 @@ func TestRunSuiteWithSecretAndTwoFA(t *testing.T) {
 		},
 	}
 
-	if err := srv.Run(ctx); err != nil {
+	if err := srv.Run(ctx, "udp"); err != nil {
 		t.Fatalf("failed to start test server: %v", err)
 	}
 	defer srv.Shutdown()
